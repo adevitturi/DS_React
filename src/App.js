@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Dark Souls Item Stats Viewer</h1>
+        <button className="mybuton" onClick={function() { loadItem(); }}>
+        	Hola
+      	</button>
       </header>
     </div>
   );
 }
 
 export default App;
+
+function loadItem() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+     console.log(this.responseText);
+    }
+  };
+  xhttp.open("GET", "https://darksouls2.wiki.fextralife.com/Mastodon+Halberd", true);
+  xhttp.send();
+}
