@@ -3,22 +3,45 @@
 }
 
 .App-header {
-  background-color: #483C32;
+  background-color:rgba(5,0,0,0.9);
   min-height: 15vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: center;  
+}
+
+.Title-header {
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  width: 100%;
+  font-size: calc(20px + 2vmin);
+}
+
+.App-panel {
+  background-color:rgba(5,0,0,0.8);
+  min-height: 90vh;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-.input_label{
+.Input_label{
   color: #FFFFFF;
-  font-size: calc(5px + 2vmin);
+  font-size: calc(9px + 1vmin);
 }
 
+.Head-img{
+  padding: 0 20px;
+  height: 25vh;
+  float:left;
+}
+
+.mylabels{
+  fill: white;
+}
+
+.chartTitle{
+  color: white;
+  text-align: center;
+  font-size: calc(8px + 1vmin);
+}
