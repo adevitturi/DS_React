@@ -1,7 +1,11 @@
+Sample React Project for viewing Dark Souls 2 Weapon Stats
+https://adevitturi.github.io/DS_React/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## First needed Script after cloning to get node modules:
 ### 'npm install gh-pages --save-dev'
+### 'npm install react-vis --save'
 
 ## Script to run localy
 ### 'npm start'

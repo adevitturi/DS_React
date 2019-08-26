@@ -1,9 +1,5 @@
-.App {
-  text-align: center;
-}
-
 .App-header {
-  background-color:rgba(5,0,0,0.9);
+  background-color:rgba(5,0,0,0.85);
   min-height: 15vh;
   display: flex;
   align-items: center;  
@@ -17,7 +13,7 @@
 }
 
 .App-panel {
-  background-color:rgba(5,0,0,0.8);
+  background-color:rgba(5,0,0,0.65);
   min-height: 90vh;
 }
 
@@ -44,4 +40,20 @@
   color: white;
   text-align: center;
   font-size: calc(8px + 1vmin);
+}
+
+.item_input{
+  height:90px;
+}
+
+.NotesDiv{
+  height:40px;
+}
+
+.Notes{
+  color: white;
+  font-size: calc(4px + 1vmin);
+  font-style: italic;
+  position:absolute;                  
+  bottom:0;  
 }
