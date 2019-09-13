@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "plotly.js": "1.49.3",
     "react": "^16.9.0",
     "react-autocomplete-input": "^1.0.12",
     "react-dom": "^16.9.0",
-    "react-plotly.js": "2.3.0",
     "react-scripts": "3.1.1",
     "react-vis": "^1.11.7"
   },
