@@ -27,8 +27,10 @@ class App extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	    	stats:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],	
-	    	itemList: weapons
+	    	stats:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	    	itemName: "",	
+	    	itemList: weapons,
+	    	itemDescr: ""
 	    };
 	}
 
@@ -59,15 +61,7 @@ class App extends React.Component {
 		return (
 			<div className="App" class="container">
 				
-				<header className="App-header">			
-					<img src="https://i.pinimg.com/originals/25/13/4c/25134c8fb258843e0f01336a12b4b520.png"
-					alt="https://vignette.wikia.nocookie.net/deathbattlefanon/images/e/ef/The_Pursuer.png/revision/latest?cb=20170105041601"
-					 className="Head-img"></img>
-
-					<div className="Title-header">
-						Dark Souls Weapon Stats Viewer
-					</div>
-				</header>
+				<MyHeader/>
 				<div class="panel panel-default" className="App-panel">
 	    			<div class="panel-body">  			
 						<label className="Input_label">Weapon Name:</label>
@@ -105,6 +99,12 @@ class App extends React.Component {
 							title = {"Defense Stats"}
 							/>
 						  </div>
+						  <div class="col-sm-6">
+						  	<div className="WeaponDescription">
+						  		<h1>{this.state.itemName}</h1>
+							  	<h2>{this.state.itemDescr}</h2>
+						  	</div>						  	
+						  </div>
 						</div>
 						<div className="NotesDiv">
 							<p className="Notes">All the game data was gathered from https://darksouls2.wiki.fextralife.com</p>
@@ -127,9 +127,21 @@ class App extends React.Component {
 			        // You can now even select part of that html as you would in the regular DOM 
 			        // Example:
 			        // var docArticle = doc.querySelector('article').innerHTML;
-	      			var statsfromdoc = ParseHTML(html,itemName);
+	      			var statsFromDoc = ParseHTMLforStats(html,itemName);
+	      			var descrFromDoc = ParseHTMLforDescr(html);
+
+	      			// Initialize the DOM parser
+			        var parser = new DOMParser();
+			        // Parse the text
+			        var doc = parser.parseFromString(descrFromDoc, "text/html");
+			        // You can now even select part of that html as you would in the regular DOM 
+			        // Example:
+			         var docArticle = doc.querySelector('p').innerHTML;
+
 					this.setState({
-						stats: statsfromdoc
+						itemName: itemName,
+						stats: statsFromDoc,
+						itemDescr: docArticle
 					});
 		        },
 		        (error) => {
@@ -141,6 +153,23 @@ class App extends React.Component {
 	}
 }
 
+class MyHeader extends React.Component {
+
+render(){
+	return(
+		<header className="App-header">			
+			<img src="https://i.pinimg.com/originals/25/13/4c/25134c8fb258843e0f01336a12b4b520.png"
+			alt="https://vignette.wikia.nocookie.net/deathbattlefanon/images/e/ef/The_Pursuer.png/revision/latest?cb=20170105041601"
+			 className="Head-img"></img>
+
+			<div className="Title-header">
+				Dark Souls Weapon Stats Viewer
+			</div>
+		</header>
+	);
+}
+
+}
 
 class DsChart extends React.Component {
 
@@ -249,16 +278,13 @@ function DsImages(){
   );
 }
 
-function ParseHTML(HTML_resp, itemName){
+function ParseHTMLforStats(HTML_resp, itemName){
 	var searchReg = "Regular"; 
 	var searchReg10 = "<th>Regular +"; 
-	var searchMag = "Magic";
 
 	var IndexReg = HTML_resp.indexOf(searchReg);
 	var IndexReg10 = HTML_resp.indexOf(searchReg10);
 	var substr;
-
-	IndexReg10 = HTML_resp.indexOf(searchReg10);
 
 	if(IndexReg10 == -1){
 		searchReg = itemName; 
@@ -270,11 +296,11 @@ function ParseHTML(HTML_resp, itemName){
 	IndexReg = substr.indexOf(searchReg);
 	substr = substr.substring(IndexReg);
 
-	console.log(searchReg);
-	console.log(searchReg10);
-	console.log(IndexReg);
-	console.log(IndexReg10);
-	console.log(substr);
+	//console.log(searchReg);
+	//console.log(searchReg10);
+	//console.log(IndexReg);
+	//console.log(IndexReg10);
+	//console.log(substr);
 
 	var stat = [];
 	var scaling = [];
@@ -369,5 +395,23 @@ function ParseHTML(HTML_resp, itemName){
 
 	return stat;
 }
+
+function ParseHTMLforDescr(HTML_resp){
+	var searchStartQuote = "<blockquote>";
+	var searchEndQuote = "</blockquote>";
+
+	var IndexStartQuote = HTML_resp.indexOf(searchStartQuote);
+	var IndexEndQuote = HTML_resp.indexOf(searchEndQuote);
+
+	var substr = HTML_resp.substring(IndexStartQuote,IndexEndQuote);	
+
+	IndexStartQuote = substr.indexOf("<p>");
+
+	var description = substr.substring(IndexStartQuote);	
+
+	console.log(description);
+	return description;
+}
+
 
 export default App;

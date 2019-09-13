@@ -48,12 +48,21 @@
 
 .NotesDiv{
   height:40px;
+  position:relative;
 }
 
 .Notes{
   color: white;
   font-size: calc(4px + 1vmin);
   font-style: italic;
-  position:absolute;                  
-  bottom:0;  
+  position:absolute;
+  bottom:0;
+  right:0; 
+}
+
+.WeaponDescription
+{
+  color: white;
+  font-size: calc(4px + 1vmin);
+  font-style: italic;
 }
